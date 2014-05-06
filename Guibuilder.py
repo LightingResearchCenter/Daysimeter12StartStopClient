@@ -201,16 +201,24 @@ If there is an error please restart the program." #text for the user instruction
        now = datetime.datetime.now()        #gathers the current date and time
        year =str(now.year)                  #converts the year to a string
        yy= year[2:4]                        #takes the last two digits of year and uts them in yy
+       if now.month <10:
+           month= "0" +str(now.month)
+       else:
+           month = str(now.month)
+       if now.day<10:
+           day="0"+str(now.day)
+       else:
+           day= str(now.day)
        if now.hour<10:                      #if statement to correct for single digit hours
            if now.minute<10:                #if statement to correct for single digit minuets
-               date= str(now.month)+"-"+str(now.day)+"-"+yy+" "+"0"+str(now.hour)+":"+"0"+str(now.minute)+"\n" #stores the date in the proper format
+               date=month+"-"+day+"-"+yy+" "+"0"+str(now.hour)+":"+"0"+str(now.minute)+"\n" #stores the date in the proper format
            else:
-               date= str(now.month)+"-"+str(now.day)+"-"+yy+" "+"0"+str(now.hour)+":"+str(now.minute)+"\n"#stores the date in the proper format
+               date= month+"-"+day+"-"+yy+" "+"0"+str(now.hour)+":"+str(now.minute)+"\n"#stores the date in the proper format
        else:
            if now.minute<10:
-               date= str(now.month)+"-"+str(now.day)+"-"+yy+" "+str(now.hour)+":"+"0"+str(now.minute)+"\n"#stores the date in the proper format
+               date= month+"-"+day+"-"+yy+" "+str(now.hour)+":"+"0"+str(now.minute)+"\n"#stores the date in the proper format
            else:
-               date= str(now.month)+"-"+str(now.day)+"-"+yy+" "+str(now.hour)+":"+str(now.minute)+"\n"#stores the date in the proper format
+               date= month+"-"+day+"-"+yy+" "+str(now.hour)+":"+str(now.minute)+"\n"#stores the date in the proper format
        text[2]=date                         #sets the date to be written to the file
        f=open(path,"w")                     #opens the file for writing 
        for i, line in enumerate(text):         #a loop that allows us to look at all values of the list text
