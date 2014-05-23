@@ -1,7 +1,8 @@
 Daysimeter12StartStopClient
 ===========================
 Daysimeter Start-Stop Version 1.2 
-
+KNOWN ISSUES:
+	Due to the header format change part of the read of the header does not work when using Daysimeter's that have been updated to the new system. Hopefully a patch will be added soon to fix this issue.
 Purpose:
 	This program is designed to start and stop the Daysimeter as needed by the user.
 
@@ -36,3 +37,9 @@ Program Use:
 	3) 	A) Clicking "Continue" will cause the Daysimeter to continue collecting data.
 		B) Clicking "Stop" will cause the program to tell the Daysimeter to stop collecting data.
 	4) When prompted to shut down the program.
+
+
+NOTES: 	If the file dose not start initially try running as an administrator.
+		If at any point the Daysimeter gets disconnected at any point before the program finishes CLOSE DOWN THE PROGRAM, and make sure to check the log_info.txt file to make sure that it still contains the proper information.
+		
+KNOWN ISSUES:
