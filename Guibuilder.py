@@ -79,25 +79,15 @@ If there is an error please restart the program." #text for the user instruction
    """
    def edit(self, path):
        f = open(path, 'r')      #open the file for reading only
-       status=f.readline()      #reads the first line of the file
-       ID=f.readline()          #reads the second line of the file
-       startDate=f.readline()   #reads the third line of the file
-       interval=f.readline()    #reads the fourth line of the file
-       hourNum=f.readline()     #reads the fifth line of the file
-       downFlag=f.readline()    #reads the sixth line of the file
-       battVolt=f.readline()    #reads the seventh line of the file
-       text= "*****************\n\nNotes:\nStatus (0=stand by, 2=start new log, 4=continue log)\nID number(Do Not Change)\nStart Date/Time (mm-dd-yy HH:MM)\nLog Interval (multiple of 30 seconds; must be three digits...e.g., uuse 030 instead of 30)\nNumber of hours logging on current battery\nDownload flag (0=download occurred, 1=not yet downloaded)\nBattery voltage (mV)"
-                               #for line 89, this the lines that go below the header, and are not
-                               #going to be read because they are always the same
-       fileText= [status, ID, startDate, interval, hourNum, downFlag, battVolt, text] #combines all lines in to a single data structure
-       if (status == "4\n" or status=="2\n"):   #checks to see if the first line is a 2 or a 4 
+       fileText=f.readlines()   #reads all lines of the file and saves them as a list 
+       if (fileText[0] == "4\n" or fileText[0]=="2\n"):   #checks to see if the first line is a 2 or a 4 
            self.button["text"]="Continue"       #updates the button text for user input
            self.button["command"]= self.cont    #changes the command of the button to call Application.cont on line 115
            self.button2 = Button(self, text = "Stop", command=lambda: self.stop(path, fileText)) 
                                                 #for line 97 creates a new button to call Application.Stop on line 128
            self.button2.grid(row= 2, column =1) #sets the location of button2 and prints it in the window
            self.button.grid(row=2, column = 0)  #sets the location of button and prints it in the window
-       elif (status=="0\n"):                    #first if failed, checks to see if the first line is a 0
+       elif (fileText[0]=="0\n"):                    #first if failed, checks to see if the first line is a 0
            self.instructions["text"]="What would you like to do?"   #user instructions
            self.button["text"]="Start"          #updates the buttons text for user input
            self.button["command"]=lambda: self.start(path, fileText)    #updates button's command to call Application.start on line 147
@@ -128,9 +118,8 @@ If there is an error please restart the program." #text for the user instruction
    def stop(self, path, text):
        text[0]="0\n"            #changes the necessary values
        f=open(path,"w")         #opens the file "log_ingo.txt" for writing
-       for x in range(0,8):     #a loop that allows us to look at all values of the list text
-                                #(note: range is 8 because text will always have 8 values)
-           f.write(text[x])     #writes text to "log_info.txt" one line at a time
+       for i, line in enumerate(text):#a loop that allows us to look at all values of the list text
+           f.write(line)           #writes text to "log_info.txt" one line at a time
        f.close()                #closes "log_info.txt"
        self.instructions["text"]="Complete, data collection stopped. \n Please shut down this program." #new users instructions 172
        self.button.grid_forget()#removes button
@@ -170,7 +159,7 @@ If there is an error please restart the program." #text for the user instruction
    Possible END OF PROGRAM
    """
    def noth(self):
-       self.instructions["text"]="Data collection on remained on StandBy.\n Please shut down this program."   #user instructions
+       self.instructions["text"]="Data collection remained on StandBy.\n Please shut down this program."   #user instructions
        self.button.grid_forget()    #removes button
        self.button2.grid_forget()   #removes button2
        return                       #Possible END OF PROGRAM
@@ -224,9 +213,8 @@ If there is an error please restart the program." #text for the user instruction
                date= str(now.month)+"-"+str(now.day)+"-"+yy+" "+str(now.hour)+":"+str(now.minute)+"\n"#stores the date in the proper format
        text[2]=date                         #sets the date to be written to the file
        f=open(path,"w")                     #opens the file for writing 
-       for x in range(0,8):                 #a loop that allows us to look at all values of the list text
-                                            #(note: range is 8 because text will always have 8 values)
-           f.write(text[x])                 #writes text to "log_info.txt" one line at a time
+       for i, line in enumerate(text):         #a loop that allows us to look at all values of the list text
+           f.write(line)                       #writes text to "log_info.txt" one line at a time
        f.close()                            #closes the file "log_info.txt"
        self.instructions["text"]="Data collection started.\n Please remove the Daysimeter \n\
        and close the program."              #users instructions
