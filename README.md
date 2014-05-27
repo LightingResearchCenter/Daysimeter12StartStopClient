@@ -67,6 +67,7 @@ Program Use:
 		
 	4) When prompted to shut down the program.
 	
-NOTES: 	If the file dose not start initially try running as an administrator.
+NOTES: 	
+	If the file dose not start initially try running as an administrator.
 
 	If at any point the Daysimeter gets disconnected at any point before the program finishes CLOSE DOWN THE PROGRAM, and make sure to check the log_info.txt file to make sure that it still contains the proper information. This program will not Restore lost information, if you need further assistance please contact the LRC.
