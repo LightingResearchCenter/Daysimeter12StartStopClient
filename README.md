@@ -46,13 +46,15 @@ Program Use:
 		
 		C) Click "I understand" to start the new log
 		
-	4) You will then be prompted for what interval the device should collect the data. When you have decided click "Submit"
+	4) You will then be prompted for what interval the device should collect the data. Each interval tells you how long the Daysimeter will be able to collect Data, past this point there will not be enough space to add more data.
 	
-	5) Wait until the Program says "Please remove the Daysimeter" to remove the Daysimeter. 
+	5)When you have decided click "Submit"
 	
-	6) Once removed wait until the Daysimeter finishes its startup process.
+	6) Wait until the Program says "Please remove the Daysimeter" to remove the Daysimeter. 
 	
-	7) Close the program.
+	7) Once removed wait until the Daysimeter finishes its startup process.
+	
+	8) Close the program.
 	
 	
 	STOPING THE DAYSIMETER:

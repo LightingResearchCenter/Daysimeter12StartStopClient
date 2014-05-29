@@ -172,17 +172,17 @@ If there is an error please restart the program." #text for the user instruction
    def timerSet(self,text,path):
        self.instructions["text"]= "What interval should it gather data"  #user instructions
        self.getInterval = StringVar()   #a variable that stores the user input when the "submit" button is clicked
-       self.thirty=Radiobutton(self, text="30 sec", value="030\n", variable=self.getInterval)   #radio button for 30 sec
+       self.thirty=Radiobutton(self, text="30 sec for 5.5 days", value="030\n", variable=self.getInterval)   #radio button for 30 sec
        self.thirty.grid(row=1,column=0)                                                         #prints radio button for 30 sec
-       self.sixety=Radiobutton(self, text="60 sec", value="060\n", variable=self.getInterval)   #radio button for 60 sec
+       self.sixety=Radiobutton(self, text="60 sec for 11 days", value="060\n", variable=self.getInterval)   #radio button for 60 sec
        self.sixety.grid(row=2,column=0)                                                         #prints radio button for 60 sec
-       self.ninety=Radiobutton(self, text="90 sec", value="090\n", variable=self.getInterval)   #radio button for 90 sec
+       self.ninety=Radiobutton(self, text="90 sec for 16.5 days", value="090\n", variable=self.getInterval)   #radio button for 90 sec
        self.ninety.grid(row=3,column=0)                                                         #prints radio button for 90 sec
-       self.one_twenty=Radiobutton(self, text="120 sec", value="120\n", variable=self.getInterval)#radio button for 120 sec
+       self.one_twenty=Radiobutton(self, text="120 sec for 22 days", value="120\n", variable=self.getInterval)#radio button for 120 sec
        self.one_twenty.grid(row=4,column=0)                                                     #prints radio button for 120 sec
-       self.one_fifety=Radiobutton(self, text="150 sec", value="150\n", variable=self.getInterval)#radio button for 150 sec
+       self.one_fifety=Radiobutton(self, text="150 sec for 27.5 days", value="150\n", variable=self.getInterval)#radio button for 150 sec
        self.one_fifety.grid(row=5,column=0)                                                     #prints radio button for 150 sec
-       self.one_eighty=Radiobutton(self, text="180 sec", value="180\n", variable=self.getInterval)#radio button for 180 sec
+       self.one_eighty=Radiobutton(self, text="180 sec for 33 days", value="180\n", variable=self.getInterval)#radio button for 180 sec
        self.one_eighty.grid(row=6,column=0)                                                     #prints radio button for 180 sec
        self.thirty.select()             #set up so only one value is active at one time
        self.button2["text"]="Submit"    #updates button2 text
