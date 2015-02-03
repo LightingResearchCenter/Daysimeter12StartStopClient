@@ -268,7 +268,11 @@ If there is an error please restart the program." #text for the user instruction
                 date= month+"-"+day+"-"+yy+" "+str(now.hour)+"0"+str(now.minute)#stores the date in the proper format
             else:
                 date= month+"-"+day+"-"+yy+" "+str(now.hour)+str(now.minute)#stores the date in the proper format
-        shutil.copy2(path,"C:\\Daysimeter Files\\" + date + " log_info.txt")
+        if not os.path.isdir("C:\\Daysimeter Files"):
+            os.makedirs("C:\\Daysimeter Files")
+            shutil.copy2(path,"C:\\Daysimeter Files\\" + date + " log_info.txt")
+        else:
+            shutil.copy2(path,"C:\\Daysimeter Files\\" + date + " log_info.txt")
         return                               #Possible END OF PRORGRAM
 """
 Below are the commands that are run when the program is started. this creates an application object,
