@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Completed 2/2/15
+Completed 2/3/15
 
 @author: Timothy Plummer
 """
@@ -51,33 +51,11 @@ If there is an error please restart the program." #text for the user instruction
         computer, except the C:\ drive because it is a reserved drive letter,and will look at each
         one for two files, "log_info.txt" and "data_log.txt". If these two are found there will
         be a check to see if the "log_info.txt" is less then or equal 1050 bytes (in case the
-        file is 1024 or higher due to an error). if it is found it will copy the files to C:\\Daysimeter Files
-        then ir will call edit, with the path  to "log_info.txt", if not it the search button
-        remains and will allow the user to search again.
+        file is 1024 or higher due to an error). Then it will call edit, with the path  to
+        "log_info.txt", if not it the search button remains and will allow the user to search again.
         CALLED FROM :Application.create_interface
         CALLES: Application.edit() with path to "log_info.txt"
         """
-        now = datetime.datetime.now()        #gathers the current date and time
-        year =str(now.year)                  #converts the year to a string
-        yy= year[2:4]                        #takes the last two digits of year and uts them in yy
-        if now.month <10:
-            month= "0" +str(now.month)
-        else:
-            month = str(now.month)
-        if now.day<10:
-            day="0"+str(now.day)
-        else:
-            day= str(now.day)
-        if now.hour<10:                      #if statement to correct for single digit hours
-            if now.minute<10:                #if statement to correct for single digit minuets
-                date=month+"-"+day+"-"+yy+" "+"0"+str(now.hour)+"0"+str(now.minute) #stores the date in the proper format
-            else:
-                date= month+"-"+day+"-"+yy+" "+"0"+str(now.hour)+str(now.minute)#stores the date in the proper format
-        else:
-            if now.minute<10:
-                date= month+"-"+day+"-"+yy+" "+str(now.hour)+"0"+str(now.minute)#stores the date in the proper format
-            else:
-                date= month+"-"+day+"-"+yy+" "+str(now.hour)+str(now.minute)#stores the date in the proper format
         drives = win32api.GetLogicalDriveStrings()  #gets the strings for the active drives
         drives = drives.split('\000')[:-1]          #splits the strings out so they are usable
         self.instructions["text"] = "Searching"     #gives the user feedback so they know it is doing something
@@ -86,11 +64,6 @@ If there is an error please restart the program." #text for the user instruction
                 path1= rootname + "log_info.txt"    #creates a string with the possible path to the first test file
                 path2= rootname + "data_log.txt"    #creates a string to the 2nd possible test file
                 if (os.path.isfile(path1) & os.path.isfile(path2)): #tests to see if the files exists
-                    storage = "C:\\Daysimeter Files"
-                    if not os.path.isdir(storage):
-                        os.makedirs(storage)
-                    shutil.copy2(path1,storage+"\\"+date+" log_info.txt")
-                    shutil.copy2(path2,storage+"\\"+date+" data_log.txt")
                     if (os.path.getsize(path1)<= 1050): #if they do check to see if "log_info.txt" is of the right size
                         self.instructions["text"]="Found, what would you like to do."   #if it up date the text to to tell the user
                         self.edit(path1)            #call to edit on line 80
@@ -188,7 +161,7 @@ If there is an error please restart the program." #text for the user instruction
         text[0]="2\n"                #replaces the data necessary
         self.timerSet(text, path)    #calls the function timerSet on line 183
         self.button.grid_forget()    #removes button
-
+ 
     def noth(self):
         """
         This function will not change any part of the file "log_info.txt"
@@ -273,6 +246,29 @@ If there is an error please restart the program." #text for the user instruction
         self.one_twenty.grid_remove()        #removes radio button from window
         self.one_fifety.grid_remove()        #removes radio button from window
         self.one_eighty.grid_remove()        #removes radio button from window
+        now = datetime.datetime.now()        #gathers the current date and time
+        year =str(now.year)                  #converts the year to a string
+        yy= year[2:4]                        #takes the last two digits of year and uts them in yy
+        ## This section is to properly name the file saved to the hard drive
+        if now.month <10:
+            month= "0" +str(now.month)
+        else:
+            month = str(now.month)
+        if now.day<10:
+            day="0"+str(now.day)
+        else:
+            day= str(now.day)
+        if now.hour<10:                      #if statement to correct for single digit hours
+            if now.minute<10:                #if statement to correct for single digit minuets
+                date=month+"-"+day+"-"+yy+" "+"0"+str(now.hour)+"0"+str(now.minute) #stores the date in the proper format
+            else:
+                date= month+"-"+day+"-"+yy+" "+"0"+str(now.hour)+str(now.minute)#stores the date in the proper format
+        else:
+            if now.minute<10:
+                date= month+"-"+day+"-"+yy+" "+str(now.hour)+"0"+str(now.minute)#stores the date in the proper format
+            else:
+                date= month+"-"+day+"-"+yy+" "+str(now.hour)+str(now.minute)#stores the date in the proper format
+        shutil.copy2(path,"C:\\Daysimeter Files\\" + date + " log_info.txt")
         return                               #Possible END OF PRORGRAM
 """
 Below are the commands that are run when the program is started. this creates an application object,
